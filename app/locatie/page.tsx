@@ -1,21 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { Dialog, DialogPanel } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
-import Image from "next/image";
-
-const navigation = [
-  { name: "Despre Noi", href: "/despre-noi" },
-  { name: "Locatie", href: "/locatie" },
-  { name: "Preturi", href: "/preturi" },
-  { name: "Contact", href: "/contact" },
-  { name: "FAQ", href: "/faq" },
-  { name: "Log in", href: "#" },
-];
-
-export default function Home() {
+export default function Location() {
   return (
     <div className="bg-white">
       <div className="relative">
@@ -57,11 +42,9 @@ export default function Home() {
           </div>
         </div>
         <div className="bg-gray-50 lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-          <Image
-            width={1000}
-            height={1000}
+          <img
             alt=""
-            src="/padelguy2.jpg"
+            src="https://images.unsplash.com/photo-1483389127117-b6a2102724ae?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1587&q=80"
             className="aspect-3/2 object-cover lg:aspect-auto lg:size-full"
           />
         </div>

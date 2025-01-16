@@ -1,0 +1,5 @@
+{
+  "rules": {
+    "bem/class-name": "off"
+  }
+}
