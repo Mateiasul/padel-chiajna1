@@ -131,7 +131,7 @@ export default function About() {
                     occaecat aliqua.
                   </p>
                 </div>
-                <div className="mt-14 flex justify-end gap-8 sm:-mt-44 sm:justify-start sm:pl-20 lg:mt-0 lg:pl-0">
+                {/* <div className="mt-14 flex justify-end gap-8 sm:-mt-44 sm:justify-start sm:pl-20 lg:mt-0 lg:pl-0">
                   <div className="ml-auto w-44 flex-none space-y-8 pt-32 sm:ml-0 sm:pt-80 lg:order-last lg:pt-36 xl:order-none xl:pt-80">
                     <div className="relative">
                       <img
@@ -178,7 +178,7 @@ export default function About() {
                       <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10" />
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -230,11 +230,11 @@ export default function About() {
 
         {/* Image section */}
         <div className="mt-32 sm:mt-40 xl:mx-auto xl:max-w-7xl xl:px-8">
-          <img
+          {/* <img
             alt=""
             src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2832&q=80"
             className="aspect-[5/2] w-full object-cover xl:rounded-3xl"
-          />
+          /> */}
         </div>
 
         {/* Values section */}
@@ -296,7 +296,7 @@ export default function About() {
             <h2 className="text-center text-lg/8 font-semibold text-gray-900">
               Trusted by the world’s most innovative teams
             </h2>
-            <div className="mx-auto mt-10 grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-10 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-5">
+            {/* <div className="mx-auto mt-10 grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-10 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-5">
               <img
                 alt="Transistor"
                 src="https://tailwindui.com/plus/img/logos/158x48/transistor-logo-gray-900.svg"
@@ -332,7 +332,7 @@ export default function About() {
                 height={48}
                 className="col-span-2 col-start-2 max-h-12 w-full object-contain sm:col-start-auto lg:col-span-1"
               />
-            </div>
+            </div> */}
           </div>
         </div>
 
@@ -354,11 +354,11 @@ export default function About() {
           >
             {team.map((person) => (
               <li key={person.name}>
-                <img
+                {/* <img
                   alt=""
                   src={person.imageUrl}
                   className="mx-auto size-24 rounded-full"
-                />
+                /> */}
                 <h3 className="mt-6 text-base/7 font-semibold tracking-tight text-gray-900">
                   {person.name}
                 </h3>
@@ -384,11 +384,11 @@ export default function About() {
                 key={post.id}
                 className="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-gray-900 px-8 pb-8 pt-80 sm:pt-48 lg:pt-80"
               >
-                <img
+                {/* <img
                   alt=""
                   src={post.imageUrl}
                   className="absolute inset-0 -z-10 size-full object-cover"
-                />
+                /> */}
                 <div className="absolute inset-0 -z-10 bg-gradient-to-t from-gray-900 via-gray-900/40" />
                 <div className="absolute inset-0 -z-10 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
 
@@ -404,11 +404,11 @@ export default function About() {
                       <circle r={1} cx={1} cy={1} />
                     </svg>
                     <div className="flex gap-x-2.5">
-                      <img
+                      {/* <img
                         alt=""
                         src={post.author.imageUrl}
                         className="size-6 flex-none rounded-full bg-white/10"
-                      />
+                      /> */}
                       {post.author.name}
                     </div>
                   </div>
