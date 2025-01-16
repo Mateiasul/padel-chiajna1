@@ -1,4 +1,5 @@
 import { CheckCircleIcon } from "@heroicons/react/20/solid";
+import Link from "next/link";
 
 const tiers = [
   {
@@ -82,13 +83,13 @@ export default function Example() {
                 <p className="mt-3 text-sm/6 text-gray-500">
                   {tier.price.annually} per month if paid annually
                 </p>
-                <a
+                <Link
                   href={tier.href}
                   aria-describedby={tier.id}
                   className="mt-10 block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
                   Buy plan
-                </a>
+                </Link>
                 <p className="mt-10 text-sm/6 font-semibold text-gray-900">
                   {tier.description}
                 </p>

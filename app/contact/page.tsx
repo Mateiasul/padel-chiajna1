@@ -3,6 +3,7 @@ import {
   EnvelopeIcon,
   PhoneIcon,
 } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 export default function Example() {
   return (
@@ -69,9 +70,12 @@ export default function Example() {
                   />
                 </dt>
                 <dd>
-                  <a href="tel:+40 741 576 619" className="hover:text-gray-900">
+                  <Link
+                    href="tel:+40 741 576 619"
+                    className="hover:text-gray-900"
+                  >
                     +40 741 576 619
-                  </a>
+                  </Link>
                 </dd>
               </div>
               <div className="flex gap-x-4">
@@ -83,12 +87,12 @@ export default function Example() {
                   />
                 </dt>
                 <dd>
-                  <a
+                  <Link
                     href="mailto:hello@example.com"
                     className="hover:text-gray-900"
                   >
                     padel_chiajna@contact.ro
-                  </a>
+                  </Link>
                 </dd>
               </div>
             </dl>

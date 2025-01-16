@@ -1,19 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { Dialog, DialogPanel } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import Image from "next/image";
-
-const navigation = [
-  { name: "Despre Noi", href: "/despre-noi" },
-  { name: "Locatie", href: "/locatie" },
-  { name: "Preturi", href: "/preturi" },
-  { name: "Contact", href: "/contact" },
-  { name: "FAQ", href: "/faq" },
-  { name: "Log in", href: "#" },
-];
 
 export default function Home() {
   return (
@@ -42,12 +30,12 @@ export default function Home() {
                   facilități de top și o atmosferă prietenoasă.
                 </p>
                 <div className="mt-10 flex items-center gap-x-6">
-                  <a
+                  <Link
                     href="#"
                     className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   >
                     Rezerva un teren
-                  </a>
+                  </Link>
                   {/* <a href="#" className="text-sm/6 font-semibold text-gray-900">
                     Learn more <span aria-hidden="true">→</span>
                   </a> */}
