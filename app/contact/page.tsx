@@ -1,11 +1,47 @@
+"use client";
 import {
   BuildingOffice2Icon,
   EnvelopeIcon,
   PhoneIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { createClient } from "../utils/supabase/client";
 
-export default function Example() {
+interface IFormInput {
+  firstName: string;
+  lastName: string;
+  phone: string;
+  email: string;
+  text: string;
+}
+
+export default function Contact() {
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    reset,
+  } = useForm<IFormInput>();
+  const onSubmit: SubmitHandler<IFormInput> = (data) => handleFormSubmit(data);
+  const supabase = createClient();
+
+  async function handleFormSubmit(values: IFormInput) {
+    const { firstName, lastName, phone, email, text } = values;
+    try {
+      const { error } = await supabase
+        .from("contactUs")
+        .insert({ firstName, lastName, phone, email, text });
+      if (error) {
+        throw error;
+      }
+      alert("Form submitted successfully");
+      reset();
+    } catch (error) {
+      console.log("Error occurred", { error });
+    }
+  }
+
   return (
     <div className="relative isolate bg-white">
       <div className="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2">
@@ -99,6 +135,7 @@ export default function Example() {
           </div>
         </div>
         <form
+          onSubmit={handleSubmit(onSubmit)}
           action="#"
           method="POST"
           className="px-6 pb-24 pt-20 sm:pb-32 lg:px-8 lg:py-48"
@@ -114,12 +151,20 @@ export default function Example() {
                 </label>
                 <div className="mt-2.5">
                   <input
-                    id="first-name"
-                    name="first-name"
+                    {...register("firstName", {
+                      required: true,
+                      maxLength: 20,
+                    })}
+                    placeholder="First name"
+                    aria-invalid={errors.firstName ? "true" : "false"}
+                    name="firstName"
                     type="text"
                     autoComplete="given-name"
                     className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
                   />
+                  {errors.firstName?.type === "required" && (
+                    <p role="alert">First name is required</p>
+                  )}
                 </div>
               </div>
               <div>
@@ -131,12 +176,20 @@ export default function Example() {
                 </label>
                 <div className="mt-2.5">
                   <input
-                    id="last-name"
-                    name="last-name"
+                    {...register("lastName", {
+                      pattern: /^[A-Za-z]+$/i,
+                      required: true,
+                    })}
+                    name="lastName"
+                    placeholder="Last name"
                     type="text"
                     autoComplete="family-name"
                     className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
+                    aria-invalid={errors.lastName ? "true" : "false"}
                   />
+                  {errors.lastName?.type === "required" && (
+                    <p role="alert">Last name is required</p>
+                  )}
                 </div>
               </div>
               <div className="sm:col-span-2">
@@ -148,12 +201,18 @@ export default function Example() {
                 </label>
                 <div className="mt-2.5">
                   <input
-                    id="email"
+                    {...register("email", {
+                      required: true,
+                      pattern: /^\S+@\S+$/i,
+                    })}
+                    placeholder="xxxxx@gmail.com"
+                    aria-invalid={errors.email ? "true" : "false"}
                     name="email"
                     type="email"
                     autoComplete="email"
                     className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
                   />
+                  {errors.email && <p role="alert">{errors.email.message}</p>}
                 </div>
               </div>
               <div className="sm:col-span-2">
@@ -165,12 +224,13 @@ export default function Example() {
                 </label>
                 <div className="mt-2.5">
                   <input
-                    id="phone-number"
-                    name="phone-number"
                     type="tel"
-                    autoComplete="tel"
+                    placeholder="0723......."
+                    {...register("phone", { required: true })}
+                    aria-invalid={errors.phone ? "true" : "false"}
                     className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
                   />
+                  {errors.phone && <p role="alert">{errors.phone.message}</p>}
                 </div>
               </div>
               <div className="sm:col-span-2">
@@ -182,7 +242,6 @@ export default function Example() {
                 </label>
                 <div className="mt-2.5">
                   <textarea
-                    id="message"
                     name="message"
                     rows={4}
                     className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"

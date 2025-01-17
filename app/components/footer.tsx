@@ -1,5 +1,8 @@
+"use client";
 import Link from "next/link";
 import { JSX, SVGProps } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { createClient } from "../utils/supabase/client";
 
 const navigation = {
   solutions: [
@@ -90,7 +93,34 @@ const navigation = {
   ],
 };
 
+interface IFormInput {
+  email: string;
+}
+
 export default function Footer() {
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    reset,
+  } = useForm<IFormInput>();
+  const onSubmit: SubmitHandler<IFormInput> = (data) => handleFormSubmit(data);
+  const supabase = createClient();
+
+  async function handleFormSubmit(values: IFormInput) {
+    const { email } = values;
+    try {
+      const { error } = await supabase.from("newsletter").insert({ email });
+      if (error) {
+        throw error;
+      }
+      alert("Form submitted successfully");
+      reset();
+    } catch (error) {
+      console.log("Error occurred", { error });
+    }
+  }
+
   return (
     <footer className="bg-white">
       <div className="mx-auto max-w-7xl px-6 pb-8 pt-20 sm:pt-24 lg:px-8 lg:pt-32">
@@ -175,18 +205,24 @@ export default function Footer() {
               The latest news, articles, and resources, sent to your inbox
               weekly.
             </p>
-            <form className="mt-6 sm:flex sm:max-w-md">
+            <form
+              className="mt-6 sm:flex sm:max-w-md"
+              onSubmit={handleSubmit(onSubmit)}
+            >
               <label htmlFor="email-address" className="sr-only">
                 Email address
               </label>
               <input
-                id="email-address"
-                name="email-address"
+                {...register("email", {
+                  required: true,
+                  pattern: /^\S+@\S+$/i,
+                })}
+                placeholder="xxxxx@gmail.com"
+                aria-invalid={errors.email ? "true" : "false"}
+                name="email"
                 type="email"
-                required
-                placeholder="Enter your email"
                 autoComplete="email"
-                className="w-full min-w-0 rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:w-64 sm:text-sm/6 xl:w-full"
+                className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
               />
               <div className="mt-4 sm:ml-4 sm:mt-0 sm:shrink-0">
                 <button
