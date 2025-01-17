@@ -242,11 +242,13 @@ export default function Contact() {
                 </label>
                 <div className="mt-2.5">
                   <textarea
-                    name="message"
+                    {...register("text", { required: true })}
                     rows={4}
+                    aria-invalid={errors.text ? "true" : "false"}
                     className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
                     defaultValue={""}
                   />
+                  {errors.text && <p role="alert">{errors.text.message}</p>}
                 </div>
               </div>
             </div>
