@@ -163,7 +163,9 @@ export default function Contact() {
                     className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
                   />
                   {errors.firstName?.type === "required" && (
-                    <p role="alert">First name is required</p>
+                    <p role="alert" className="text-red-400">
+                      First name is required
+                    </p>
                   )}
                 </div>
               </div>
@@ -188,7 +190,9 @@ export default function Contact() {
                     aria-invalid={errors.lastName ? "true" : "false"}
                   />
                   {errors.lastName?.type === "required" && (
-                    <p role="alert">Last name is required</p>
+                    <p role="alert" className="text-red-400">
+                      Last name is required
+                    </p>
                   )}
                 </div>
               </div>
@@ -212,7 +216,11 @@ export default function Contact() {
                     autoComplete="email"
                     className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
                   />
-                  {errors.email && <p role="alert">{errors.email.message}</p>}
+                  {errors.email?.type === "required" && (
+                    <p role="alert" className="text-red-400">
+                      Email is required
+                    </p>
+                  )}
                 </div>
               </div>
               <div className="sm:col-span-2">
@@ -230,7 +238,11 @@ export default function Contact() {
                     aria-invalid={errors.phone ? "true" : "false"}
                     className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
                   />
-                  {errors.phone && <p role="alert">{errors.phone.message}</p>}
+                  {errors.phone?.type === "required" && (
+                    <p role="alert" className="text-red-400">
+                      Phone is required
+                    </p>
+                  )}
                 </div>
               </div>
               <div className="sm:col-span-2">
@@ -248,7 +260,11 @@ export default function Contact() {
                     className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
                     defaultValue={""}
                   />
-                  {errors.text && <p role="alert">{errors.text.message}</p>}
+                  {errors.text?.type === "required" && (
+                    <p role="alert" className="text-red-400">
+                      Text is required
+                    </p>
+                  )}
                 </div>
               </div>
             </div>

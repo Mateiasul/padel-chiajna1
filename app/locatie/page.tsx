@@ -1,7 +1,18 @@
+import Image from "next/image";
 import { MapComponent } from "../components/map";
 import { MapProvider } from "../providers/map-provider";
 
 export default function Location() {
+  const images = [
+    { source: "/padel1.jpg" },
+    { source: "/padel2.jpg" },
+    { source: "/padel3.jpg" },
+    { source: "/padel4.jpg" },
+    { source: "/padel5.jpg" },
+    { source: "/padel6.jpg" },
+    { source: "/padel7.jpg" },
+  ];
+
   return (
     <MapProvider>
       <div className="relative bg-white">
@@ -22,6 +33,24 @@ export default function Location() {
             <MapComponent></MapComponent>
           </div>
         </div>
+        <ul
+          role="list"
+          className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8"
+        >
+          {images.map((file) => (
+            <li key={file.source} className="relative">
+              <div className="group overflow-hidden rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 focus-within:ring-offset-gray-100">
+                <Image
+                  alt=""
+                  src={file.source}
+                  width={1000}
+                  height={1000}
+                  className="pointer-events-none aspect-[10/7] object-cover group-hover:opacity-75"
+                />
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
     </MapProvider>
   );

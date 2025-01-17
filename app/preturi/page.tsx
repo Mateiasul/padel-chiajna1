@@ -3,65 +3,57 @@ import Link from "next/link";
 
 const tiers = [
   {
-    name: "Basic",
+    name: "Abonament standard",
     id: "tier-basic",
     href: "#",
-    price: { monthly: "$19", annually: "$15" },
-    description: "Everything necessary to get started.",
+    price: { monthly: "150", annually: "130" },
+    description: "Potrivit pentru orice jucator de padel",
     features: [
-      "5 products",
-      "Up to 1,000 subscribers",
-      "Basic analytics",
-      "48-hour support response time",
+      "1 ora / sapt de persoana",
+      "8 jucatori/ora",
+      "Access vestiare",
+      "Suprafata teren: 20x10m",
     ],
   },
   {
-    name: "Essential",
-    id: "tier-essential",
+    name: "Abonament studenti",
+    id: "tier-student",
     href: "#",
-    price: { monthly: "$49", annually: "$39" },
-    description:
-      "Everything in Basic, plus essential tools for growing your business.",
+    price: { monthly: "100", annually: "90" },
+    description: "Pentru orice student",
     features: [
-      "25 products",
-      "Up to 10,000 subscribers",
-      "Advanced analytics",
-      "24-hour support response time",
-      "Marketing automations",
+      "1 ora / sapt de persoana",
+      "8 jucatori/ora",
+      "Access vestiare",
+      "Suprafata teren: 20x10m",
     ],
   },
   {
-    name: "Growth",
+    name: "Pret pe ora",
     id: "tier-growth",
     href: "#",
-    price: { monthly: "$99", annually: "$79" },
-    description:
-      "Everything in Essential, plus collaboration tools and deeper insights.",
+    price: { monthly: "140", annually: "140" },
+    description: "Inchiriat un teren standard pentru o ora",
     features: [
-      "Unlimited products",
-      "Unlimited subscribers",
-      "Advanced analytics",
-      "1-hour, dedicated support response time",
-      "Marketing automations",
-      "Custom reporting tools",
+      "1 ora / sapt de persoana",
+      "8 jucatori/ora",
+      "Access vestiare",
+      "Suprafata teren: 20x10m",
     ],
   },
 ];
 
-export default function Example() {
+export default function Prices() {
   return (
     <div className="bg-white py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-4xl sm:text-center">
-          <h2 className="text-base/7 font-semibold text-indigo-600">Pricing</h2>
+          <h2 className="text-base/7 font-semibold text-indigo-600">Preturi</h2>
           <p className="mt-2 text-5xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-6xl sm:text-balance">
-            Pricing that grows with you
+            Padel Chiajna
           </p>
         </div>
-        <p className="mx-auto mt-6 max-w-2xl text-lg font-medium text-pretty text-gray-600 sm:text-center sm:text-xl/8">
-          Choose an affordable plan that’s packed with the best features for
-          engaging your audience, creating customer loyalty, and driving sales.
-        </p>
+
         <div className="mt-20 flow-root">
           <div className="isolate -mt-16 grid max-w-sm grid-cols-1 gap-y-16 divide-y divide-gray-100 sm:mx-auto lg:-mx-8 lg:mt-0 lg:max-w-none lg:grid-cols-3 lg:divide-x lg:divide-y-0 xl:-mx-4">
             {tiers.map((tier) => (
