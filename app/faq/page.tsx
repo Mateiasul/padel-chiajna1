@@ -15,12 +15,12 @@ const faqs = [
     question:
       "Care sunt tarifele pentru închirierea terenului de padel în Chiajna?",
     answer:
-      "Tarifele noastre competitive pentru închirierea terenului de padel încep de la [X] lei pe oră. Consultați secțiunea de prețuri sau sunați la [XXX-XXX-XXX] pentru oferte speciale și reduceri.",
+      "Tarifele noastre competitive pentru închirierea terenului de padel încep de la 140 lei pe oră. Consultați secțiunea de prețuri sau sunați la +40 741 576 619 pentru oferte speciale și reduceri.",
   },
   {
     question: "Cum pot rezerva un teren de padel în Chiajna?",
     answer:
-      "Rezervările pentru terenul de padel se fac simplu și rapid online, pe site-ul nostru, sau telefonic la [XXX-XXX-XXX]. Recomandăm să rezervați din timp pentru a evita aglomerația.",
+      "Rezervările pentru terenul de padel se fac simplu și rapid online, pe site-ul nostru, sau telefonic la +40 741 576 619. Recomandăm să rezervați din timp pentru a evita aglomerația.",
   },
   {
     question: "Oferiți rachete și mingi de padel pentru închiriere?",
@@ -30,7 +30,7 @@ const faqs = [
   {
     question: "Terenul de padel este acoperit sau în aer liber?",
     answer:
-      "Terenul nostru de padel din Chiajna este [acoperit/în aer liber], perfect pentru joc în orice condiții meteo. Vă așteptăm cu facilități moderne.",
+      "Terenul nostru de padel din Chiajna este în aer liber, perfect pentru joc în orice condiții meteo. Vă așteptăm cu facilități moderne.",
   },
   {
     question:
@@ -46,7 +46,7 @@ const faqs = [
   {
     question: "Unde este situat terenul de padel din Chiajna, Ilfov?",
     answer:
-      "Terenul de padel se află în Chiajna, județul Ilfov, la adresa exactă [Strada/Locația]. Ne puteți găsi cu ușurință cu mașina, iar parcarea este gratuită.",
+      "Terenul de padel se află în Chiajna, județul Ilfov, la adresa exactă Intrarea Nicolae Iorga 88 Chiajna 077040. Ne puteți găsi cu ușurință cu mașina, iar parcarea este gratuită.",
   },
   {
     question: "Se organizează turnee de padel sau competiții în Chiajna?",
@@ -56,7 +56,7 @@ const faqs = [
   {
     question: "Care sunt orele de funcționare ale terenului de padel?",
     answer:
-      "Terenul nostru de padel este deschis zilnic, între [ora deschidere] și [ora închidere]. Contactați-ne pentru rezervări în afara acestui program.",
+      "Terenul nostru de padel este deschis zilnic, între 10:00 și 18:00. Contactați-ne pentru rezervări în afara acestui program.",
   },
 ];
 
