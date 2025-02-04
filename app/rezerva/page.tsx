@@ -2,10 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
-// import Logos from "./components/logos";
-import Testimonials from "./components/testimonials";
 
-export default function Home() {
+export default function Rezerva() {
   return (
     <div className="bg-white">
       <div className="relative">
@@ -23,17 +21,12 @@ export default function Home() {
             <div className="relative px-6 py-32 sm:py-40 lg:px-8 lg:py-56 lg:pr-0">
               <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl">
                 <h1 className="text-5xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-7xl">
-                  Padel Chiajna
+                  REZZEERRRRRVA
                 </h1>
-                <p className="mt-8 text-lg font-medium text-pretty text-gray-500 sm:text-xl/8">
-                  Descoperă un nou nivel al sportului de echipă la cel mai
-                  modern teren de padel din oraș. Fie că ești începător sau
-                  jucător pasionat, te așteptăm cu echipamente premium,
-                  facilități de top și o atmosferă prietenoasă.
-                </p>
+                <p className="mt-8 text-lg font-medium text-pretty text-gray-500 sm:text-xl/8"></p>
                 <div className="mt-10 flex items-center gap-x-6">
                   <Link
-                    href="/rezerva"
+                    href="#"
                     className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   >
                     Rezerva un teren
@@ -56,8 +49,6 @@ export default function Home() {
           />
         </div>
       </div>
-      {/* <Logos></Logos> */}
-      <Testimonials></Testimonials>
     </div>
   );
 }

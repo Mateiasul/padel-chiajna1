@@ -5,6 +5,7 @@ import { Dialog, DialogPanel } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import Image from "next/image";
+import { logout } from "../actions";
 
 const navigation = [
   { name: "Despre Noi", href: "/despre-noi" },
@@ -14,8 +15,9 @@ const navigation = [
   { name: "FAQ", href: "/faq" },
 ];
 
-export default function NavBar() {
+export default function NavBar(props: { loggedIn: boolean }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const loggedIn = props.loggedIn;
 
   return (
     <header className="bg-white">
@@ -47,14 +49,24 @@ export default function NavBar() {
           ))}
         </div>
         <div className="flex flex-1 items-center justify-end gap-x-6">
+          {loggedIn ? (
+            <button
+              className="hidden text-sm/6 font-semibold text-gray-900 lg:block"
+              onClick={logout}
+            >
+              Log out
+            </button>
+          ) : (
+            <Link
+              href="/login"
+              className="hidden text-sm/6 font-semibold text-gray-900 lg:block"
+            >
+              Log in
+            </Link>
+          )}
+
           <Link
-            href="/login"
-            className="hidden text-sm/6 font-semibold text-gray-900 lg:block"
-          >
-            Log in
-          </Link>
-          <Link
-            href="#"
+            href="/rezerva"
             className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
             Rezerva
@@ -111,6 +123,7 @@ export default function NavBar() {
                   <Link
                     key={item.name}
                     href={item.href}
+                    onClick={() => setMobileMenuOpen(false)}
                     className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
                   >
                     {item.name}
@@ -120,6 +133,7 @@ export default function NavBar() {
               <div className="py-6">
                 <Link
                   href="/login"
+                  onClick={() => setMobileMenuOpen(false)}
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
                 >
                   Log in

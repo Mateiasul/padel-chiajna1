@@ -1,6 +1,13 @@
+"use client";
 import { login, signup } from "../actions";
 
 export default function Login() {
+  const registerUserWithCredentials = async (formData: FormData) => {
+    await signup(formData);
+
+    alert("Va rog confirmati adresa de email");
+  };
+
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -116,7 +123,9 @@ export default function Login() {
                 </button>
                 <button
                   type="submit"
-                  formAction={signup}
+                  formAction={(formData) =>
+                    registerUserWithCredentials(formData)
+                  }
                   className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
                   Sign up
