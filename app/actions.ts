@@ -54,3 +54,24 @@ export async function signup(formData: FormData) {
     redirect("/error");
   }
 }
+
+export async function signInWithGoogle() {
+  const supabase = await createClient();
+
+  const callBackUrl = `${process.env.SITE_URL}/auth/callback`;
+
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: "google",
+    options: {
+      redirectTo: callBackUrl,
+    },
+  });
+
+  if (error) {
+    redirect("/error");
+  }
+
+  if (data) {
+    redirect(data.url);
+  }
+}

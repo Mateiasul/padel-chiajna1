@@ -25,16 +25,9 @@ export default function NavBar(props: { loggedIn: boolean }) {
         aria-label="Global"
         className="mx-auto flex max-w-7xl items-center justify-between gap-x-6 p-6 lg:px-8"
       >
-        <div className="flex lg:flex-1">
-          <Link href="/" className="-m-1.5 p-1.5">
-            <span className="sr-only">Your Company</span>
-            <Image
-              width={1000}
-              height={1000}
-              alt=""
-              src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"
-              className="h-8 w-auto"
-            />
+        <div className="flex flex-row">
+          <Link href="/">
+            <span className="text-black text-lg font-bold">Padel Chiajna</span>
           </Link>
         </div>
         <div className="hidden lg:flex lg:gap-x-12">

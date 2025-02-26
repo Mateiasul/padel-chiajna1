@@ -21,7 +21,7 @@ export default function Location() {
             <div className="mx-auto max-w-lg lg:mx-0">
               <div className="hidden sm:mt-32 sm:flex lg:mt-16"></div>
               <h1 className="mt-24 text-pretty text-5xl font-semibold tracking-tight text-gray-900 sm:mt-10 sm:text-7xl">
-                Noua nuastra locatie
+                Noua noastra locatie
               </h1>
               <p className="mt-8 text-pretty text-lg font-medium text-gray-500 sm:text-xl/8">
                 Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui
