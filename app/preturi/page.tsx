@@ -6,7 +6,7 @@ const tiers = [
     name: "Abonament standard",
     id: "tier-basic",
     href: "#",
-    price: { monthly: "150", annually: "130" },
+    price: { monthly: "700 Lei", annually: "400 Lei" },
     description: "Potrivit pentru orice jucator de padel",
     features: [
       "1 ora / sapt de persoana",
@@ -19,7 +19,7 @@ const tiers = [
     name: "Abonament studenti",
     id: "tier-student",
     href: "#",
-    price: { monthly: "100", annually: "90" },
+    price: { monthly: "500 Lei", annually: "350 Lei" },
     description: "Pentru orice student",
     features: [
       "1 ora / sapt de persoana",
@@ -80,7 +80,7 @@ export default function Prices() {
                   aria-describedby={tier.id}
                   className="mt-10 block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
-                  Buy plan
+                  Cumpara
                 </Link>
                 <p className="mt-10 text-sm/6 font-semibold text-gray-900">
                   {tier.description}
