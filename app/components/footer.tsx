@@ -5,23 +5,11 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import useSupabaseBrowserClient from "../utils/supabase/client";
 
 const navigation = {
-  solutions: [
-    { name: "Marketing", href: "#" },
-    { name: "Analytics", href: "#" },
-    { name: "Automation", href: "#" },
-    { name: "Commerce", href: "#" },
-    { name: "Insights", href: "#" },
-  ],
-  support: [
-    { name: "Submit ticket", href: "#" },
-    { name: "Documentation", href: "#" },
-    { name: "Guides", href: "#" },
-  ],
   company: [
-    { name: "About", href: "#" },
-    { name: "Blog", href: "#" },
-    { name: "Jobs", href: "#" },
-    { name: "Press", href: "#" },
+    { name: "Despre noi", href: "/despre-noi" },
+    { name: "Locatie", href: "/locatie" },
+    { name: "Contact", href: "/contact" },
+    { name: "Preturi", href: "/preturi" },
   ],
   legal: [
     { name: "Terms of service", href: "#" },
@@ -129,43 +117,7 @@ export default function Footer() {
             <div className="md:grid md:grid-cols-2 md:gap-8">
               <div>
                 <h3 className="text-sm/6 font-semibold text-gray-900">
-                  Solutions
-                </h3>
-                <ul role="list" className="mt-6 space-y-4">
-                  {navigation.solutions.map((item) => (
-                    <li key={item.name}>
-                      <Link
-                        href={item.href}
-                        className="text-sm/6 text-gray-600 hover:text-gray-900"
-                      >
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="mt-10 md:mt-0">
-                <h3 className="text-sm/6 font-semibold text-gray-900">
-                  Support
-                </h3>
-                <ul role="list" className="mt-6 space-y-4">
-                  {navigation.support.map((item) => (
-                    <li key={item.name}>
-                      <Link
-                        href={item.href}
-                        className="text-sm/6 text-gray-600 hover:text-gray-900"
-                      >
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-            <div className="md:grid md:grid-cols-2 md:gap-8">
-              <div>
-                <h3 className="text-sm/6 font-semibold text-gray-900">
-                  Company
+                  Padel Chiajna
                 </h3>
                 <ul role="list" className="mt-6 space-y-4">
                   {navigation.company.map((item) => (
@@ -199,11 +151,10 @@ export default function Footer() {
           </div>
           <div className="mt-10 xl:mt-0">
             <h3 className="text-sm/6 font-semibold text-gray-900">
-              Subscribe to our newsletter
+              Inscrie-te la newsletter-ul nostru
             </h3>
             <p className="mt-2 text-sm/6 text-gray-600">
-              The latest news, articles, and resources, sent to your inbox
-              weekly.
+              Stiri, evenimente si totul despre padel
             </p>
             <form
               className="mt-6 sm:flex sm:max-w-md"
@@ -249,7 +200,7 @@ export default function Footer() {
             ))}
           </div>
           <p className="mt-8 text-sm/6 text-gray-600 md:order-1 md:mt-0">
-            &copy; 2024 Your Company, Inc. All rights reserved.
+            &copy; 2024 Padel Chiajna, Inc. All rights reserved.
           </p>
         </div>
       </div>
