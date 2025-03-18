@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import useSupabaseBrowserClient from "../utils/supabase/client";
 import { onSubmitAction } from "../actions/form-submit";
 import { bookingFormSchema } from "../utils/types/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
