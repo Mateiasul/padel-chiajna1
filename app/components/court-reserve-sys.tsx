@@ -94,7 +94,7 @@ const CourtReservationSystem = ({
       </h1>
 
       {bookingSuccess && (
-        <div className="bg-green-50 border border-green-500 text-green-700 px-4 py-3 rounded mb-4">
+        <div className="bg-green-50 border border-green-500 text-green-700 px-4 py-3 rounded-sm mb-4">
           <strong className="font-bold">Succes!</strong>
           <span className="block sm:inline">
             Terenul dumneavoastră a fost rezervat cu succes.
@@ -117,7 +117,7 @@ const CourtReservationSystem = ({
           value={date}
           min={new Date().toISOString().split("T")[0]}
           onChange={(e) => setDate(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded focus:ring-2 text-indigo-600 focus:border-blue-500 text-black"
+          className="w-full p-2 border border-gray-300 rounded-sm focus:ring-2 text-indigo-600 focus:border-blue-500 text-black"
         />
       </div>
 
@@ -132,7 +132,7 @@ const CourtReservationSystem = ({
               className={`border rounded-lg p-4 cursor-pointer transition-all ${
                 selectedCourt === court.id
                   ? "bg-blue-50 border-blue-500 shadow-md"
-                  : "border-gray-300 hover:border-blue-300 hover:shadow"
+                  : "border-gray-300 hover:border-blue-300 hover:shadow-sm"
               }`}
               onClick={() => setSelectedCourt(court.id)}
             >
@@ -175,7 +175,7 @@ const CourtReservationSystem = ({
       )}
 
       {selectedTimeSlot && (
-        <div className="bg-gray-50 p-6 rounded-lg border border-gray-200 mb-6 shadow-sm">
+        <div className="bg-gray-50 p-6 rounded-lg border border-gray-200 mb-6 shadow-xs">
           <h2 className="text-xl font-semibold mb-4 text-blue-800">
             Informații Client
           </h2>
@@ -190,7 +190,7 @@ const CourtReservationSystem = ({
                   required: "Acest câmp este obligatoriu",
                 })}
                 type="text"
-                className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full p-2 border border-gray-300 rounded-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               />
               {errors.name && (
                 <p className="text-red-500 text-sm mt-1">
@@ -211,7 +211,7 @@ const CourtReservationSystem = ({
                   },
                 })}
                 type="email"
-                className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full p-2 border border-gray-300 rounded-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               />
               {errors.email && (
                 <p className="text-red-500 text-sm mt-1">
@@ -226,7 +226,7 @@ const CourtReservationSystem = ({
               <input
                 {...register("phone")}
                 type="tel"
-                className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full p-2 border border-gray-300 rounded-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
 

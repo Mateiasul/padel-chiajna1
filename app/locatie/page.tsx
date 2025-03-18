@@ -45,7 +45,7 @@ export default function Location() {
                   src={file.source}
                   width={1000}
                   height={1000}
-                  className="pointer-events-none aspect-[10/7] object-cover group-hover:opacity-75"
+                  className="pointer-events-none aspect-10/7 object-cover group-hover:opacity-75"
                 />
               </div>
             </li>

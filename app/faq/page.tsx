@@ -79,7 +79,7 @@ export default function Faq() {
                     <span className="ml-6 flex h-7 items-center">
                       <PlusSmallIcon
                         aria-hidden="true"
-                        className="size-6 group-data-[open]:hidden"
+                        className="size-6 group-data-open:hidden"
                       />
                       <MinusSmallIcon
                         aria-hidden="true"
