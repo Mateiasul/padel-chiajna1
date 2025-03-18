@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { JSX, SVGProps } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { createClient } from "../utils/supabase/client";
+import useSupabaseBrowserClient from "../utils/supabase/client";
 
 const navigation = {
   solutions: [
@@ -105,7 +105,7 @@ export default function Footer() {
     reset,
   } = useForm<IFormInput>();
   const onSubmit: SubmitHandler<IFormInput> = (data) => handleFormSubmit(data);
-  const supabase = createClient();
+  const supabase = useSupabaseBrowserClient();
 
   async function handleFormSubmit(values: IFormInput) {
     const { email } = values;

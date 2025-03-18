@@ -1,26 +1,38 @@
-import React, { useState, useEffect } from "react";
+"use client";
+
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { createClient } from "../utils/supabase/client";
+import useSupabaseBrowserClient from "../utils/supabase/client";
+import { onSubmitAction } from "../actions/form-submit";
+import { bookingFormSchema } from "../utils/types/schemas";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { GetAllBookingsResponse } from "../services/bookings.service";
+import { GetAllCourtsResponse } from "../services/courts.service";
 
 // Acesta ar veni din variabilele de mediu într-o aplicație reală
 
-const supabase = createClient();
-
-const CourtReservationSystem = () => {
+const CourtReservationSystem = ({
+  bookings,
+  courts,
+}: {
+  bookings: GetAllBookingsResponse;
+  courts: GetAllCourtsResponse;
+}) => {
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
-  const [courts, setCourts] = useState([]);
-  const [bookings, setBookings] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [selectedCourt, setSelectedCourt] = useState(null);
-  const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
-  const [bookingSuccess, setBookingSuccess] = useState(false);
 
+  const [loading, setLoading] = useState(false);
+  const [selectedCourt, setSelectedCourt] = useState<number | undefined>();
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState<string>();
+  const [bookingSuccess, setBookingSuccess] = useState(false);
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm();
+  } = useForm<z.output<typeof bookingFormSchema>>({
+    resolver: zodResolver(bookingFormSchema),
+  });
 
   // Intervale orare disponibile (8 AM la 10 PM)
   const timeSlots = Array.from({ length: 14 }, (_, i) => {
@@ -28,60 +40,17 @@ const CourtReservationSystem = () => {
     return `${hour}:00 - ${hour + 1}:00`;
   });
 
-  useEffect(() => {
-    fetchCourts();
-  }, []);
-
-  useEffect(() => {
-    if (date) {
-      fetchBookings();
-    }
-  }, [date]);
-
-  const fetchCourts = async () => {
-    try {
-      setLoading(true);
-      const { data, error } = await supabase
-        .from("padel_courts")
-        .select("*")
-        .order("court_number");
-
-      if (error) throw error;
-      setCourts(data || []);
-    } catch (error) {
-      console.error("Eroare la încărcarea terenurilor:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const fetchBookings = async () => {
-    try {
-      setLoading(true);
-      const { data, error } = await supabase
-        .from("bookings")
-        .select("*")
-        .eq("booking_date", date);
-
-      if (error) throw error;
-      setBookings(data || []);
-    } catch (error) {
-      console.error("Eroare la încărcarea rezervărilor:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const isTimeSlotBooked = (courtId, timeSlot) => {
+  const isTimeSlotBooked = (courtId: number, timeSlot: string) => {
     const hour = parseInt(timeSlot.split(":")[0]);
-    return bookings.some(
+    return bookings?.some(
       (booking) =>
         booking.court_id === courtId &&
         parseInt(booking.start_time.split(":")[0]) === hour
     );
   };
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: z.output<typeof bookingFormSchema>) => {
+    console.log(data, "data");
     if (!selectedCourt || !selectedTimeSlot) {
       alert("Vă rugăm să selectați un teren și un interval orar");
       return;
@@ -91,27 +60,26 @@ const CourtReservationSystem = () => {
       setLoading(true);
       const startHour = selectedTimeSlot.split(":")[0];
       const endHour = String(parseInt(startHour) + 1);
+      const formData = new FormData();
+      formData.append("email", data.email);
+      formData.append("name", data.name);
+      formData.append("phone", data.phone);
+      formData.append("endHour", `${endHour}:00)`);
+      formData.append("startHour", `${startHour}:00`);
+      formData.append("court_id", selectedCourt.toString());
+      formData.append("bookingDate", date);
 
-      const { error } = await supabase.from("bookings").insert([
-        {
-          court_id: selectedCourt,
-          booking_date: date,
-          start_time: `${startHour}:00`,
-          end_time: `${endHour}:00`,
-          customer_name: data.name,
-          customer_email: data.email,
-          customer_phone: data.phone || null,
-        },
-      ]);
+      const { success } = await onSubmitAction(formData);
 
-      console.log(error, "error");
-      if (error) throw error;
+      if (!success) {
+        alert("Nu s-a putut crea rezervarea. Vă rugăm să încercați din nou.");
+        return;
+      }
 
       setBookingSuccess(true);
-      setSelectedCourt(null);
-      setSelectedTimeSlot(null);
+      setSelectedCourt(undefined);
+      setSelectedTimeSlot(undefined);
       reset();
-      fetchBookings();
     } catch (error) {
       console.error("Eroare la crearea rezervării:", error);
       alert("Nu s-a putut crea rezervarea. Vă rugăm să încercați din nou.");
@@ -119,21 +87,6 @@ const CourtReservationSystem = () => {
       setLoading(false);
     }
   };
-
-  // Date demonstrative - ar fi înlocuite cu date reale din Supabase
-  const mockCourts = [
-    { id: 1, court_number: 1, name: "Teren A", description: "Teren interior" },
-    { id: 2, court_number: 2, name: "Teren B", description: "Teren exterior" },
-    {
-      id: 3,
-      court_number: 3,
-      name: "Teren C",
-      description: "Teren interior cu iluminare",
-    },
-  ];
-
-  // Folosește date demonstrative dacă nu sunt încărcate terenurile încă
-  const displayCourts = courts.length > 0 ? courts : mockCourts;
 
   return (
     <div className="container mx-auto p-4 max-w-4xl">
@@ -174,7 +127,7 @@ const CourtReservationSystem = () => {
           Terenuri Disponibile
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {displayCourts.map((court) => (
+          {courts?.map((court) => (
             <div
               key={court.id}
               className={`border rounded-lg p-4 cursor-pointer transition-all ${
@@ -227,6 +180,7 @@ const CourtReservationSystem = () => {
           <h2 className="text-xl font-semibold mb-4 text-blue-800">
             Informații Client
           </h2>
+          {/* <form onSubmit={handleSubmit(onSubmit)} className="space-y-4"> */}
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div>
               <label className="block text-gray-700 font-medium mb-1">
