@@ -6,7 +6,7 @@ import {
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { createClient } from "../utils/supabase/client";
+import useSupabaseBrowserClient from "../utils/supabase/client";
 
 interface IFormInput {
   firstName: string;
@@ -24,7 +24,7 @@ export default function Contact() {
     reset,
   } = useForm<IFormInput>();
   const onSubmit: SubmitHandler<IFormInput> = (data) => handleFormSubmit(data);
-  const supabase = createClient();
+  const supabase = useSupabaseBrowserClient();
 
   async function handleFormSubmit(values: IFormInput) {
     const { firstName, lastName, phone, email, text } = values;
