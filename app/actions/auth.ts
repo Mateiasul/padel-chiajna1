@@ -72,7 +72,6 @@ export async function signInWithGoogle() {
   }
 
   if (data) {
-    revalidatePath("/", "layout");
     redirect(data.url);
   }
 }
