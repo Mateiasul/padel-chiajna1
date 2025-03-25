@@ -4,7 +4,6 @@ import "./globals.css";
 import Footer from "./components/footer";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
-import { createClient } from "./utils/supabase/server";
 import NavBar from "./components/navbar/navbar";
 
 const geistSans = Geist({
@@ -28,16 +27,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const supabase = await createClient();
-
-  const { data, error } = await supabase.auth.getUser();
-
-  if (error || !data?.user) {
-    console.log("Error occurred", { error });
-  }
-
-  console.log(data, "layout");
-
   return (
     <html lang="en" className="h-full bg-gray-50">
       <body

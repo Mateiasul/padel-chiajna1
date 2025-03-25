@@ -9,9 +9,11 @@ export default async function NavBar() {
 
   const { data } = await supabase.auth.getUser();
 
+  console.log(data, "data");
   const loggedIn = data.user ? true : false;
   const fullName = data.user?.user_metadata.displayName;
   const email = data.user?.email;
+  console.log(data, "data");
 
   return (
     <Disclosure as="nav" className="bg-white shadow-sm">

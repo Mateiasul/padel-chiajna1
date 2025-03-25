@@ -60,6 +60,7 @@ export async function signInWithGoogle() {
 
   const callBackUrl = `${process.env.SITE_URL}/auth/callback`;
 
+  console.log(callBackUrl, "callBackUrl");
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "google",
     options: {
