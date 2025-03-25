@@ -32,6 +32,8 @@ export default function NavBar(props: {
   const pathname = usePathname();
   const loggedIn = props.loggedIn;
 
+  console.log(props, "navbar");
+
   return (
     <Disclosure as="nav" className="bg-white shadow-sm">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

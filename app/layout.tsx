@@ -35,6 +35,8 @@ export default async function RootLayout({
     console.log("Error occurred", { error });
   }
 
+  console.log(data, "layout");
+
   return (
     <html lang="en" className="h-full bg-gray-50">
       <body
