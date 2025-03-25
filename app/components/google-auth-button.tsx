@@ -1,6 +1,6 @@
 "use client";
 
-import { signInWithGoogle } from "../actions";
+import { signInWithGoogle } from "../actions/auth";
 
 export const GoogleAuthButton = () => {
   return (

@@ -1,4 +1,3 @@
-
 export type Json =
   | string
   | number
@@ -14,35 +13,44 @@ export type Database = {
         Row: {
           booking_date: string
           court_id: number
+          court_name: string | null
           created_at: string | null
           customer_email: string
           customer_name: string
           customer_phone: string | null
           end_time: string
           id: number
+          isActive: boolean | null
           start_time: string
+          user_id: string | null
         }
         Insert: {
           booking_date: string
           court_id: number
+          court_name?: string | null
           created_at?: string | null
           customer_email: string
           customer_name: string
           customer_phone?: string | null
           end_time: string
           id?: number
+          isActive?: boolean | null
           start_time: string
+          user_id?: string | null
         }
         Update: {
           booking_date?: string
           court_id?: number
+          court_name?: string | null
           created_at?: string | null
           customer_email?: string
           customer_name?: string
           customer_phone?: string | null
           end_time?: string
           id?: number
+          isActive?: boolean | null
           start_time?: string
+          user_id?: string | null
         }
         Relationships: [
           {

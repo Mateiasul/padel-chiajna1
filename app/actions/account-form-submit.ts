@@ -1,20 +1,31 @@
 "use server";
 
 import { createClient } from "../utils/supabase/server";
-import { submitFormSchema } from "../utils/types/schemas";
+import { accountFormSchema } from "../utils/types/schemas";
 
 export type FormState = {
-  message: string;
   success: boolean;
+  message: string;
   fields?: Record<string, string>;
   issues?: string[];
+  errors?: Record<string, string[]>;
 };
 
-export async function onSubmitAction(formData: FormData): Promise<FormState> {
+export async function accountFormSubmit(
+  prevState: FormState,
+  formData: FormData
+): Promise<FormState> {
+  if (!(formData instanceof FormData)) {
+    return {
+      message: "",
+      success: false,
+      errors: { error: ["Invalid Form Data"] },
+    };
+  }
+
   const formEntries = Object.fromEntries(formData);
-  const parsed = submitFormSchema.safeParse(formEntries);
+  const parsed = accountFormSchema.safeParse(formEntries);
   const supabase = await createClient();
-  const { data } = await supabase.auth.getUser();
 
   if (!parsed.success) {
     const fields: Record<string, string> = {};
@@ -29,23 +40,11 @@ export async function onSubmitAction(formData: FormData): Promise<FormState> {
     };
   }
 
-  const { error } = await supabase.from("bookings").insert([
-    {
-      court_id: +parsed.data.court_id,
-      booking_date: parsed.data.bookingDate,
-      start_time: parsed.data.startHour,
-      court_name: parsed.data.court_name,
-      end_time: parsed.data.endHour,
-      customer_name: parsed.data.name,
-      customer_email: parsed.data.email,
-      customer_phone: parsed.data.phone,
-      isActive: true,
-      user_id: data.user?.id,
-    },
-  ]);
+  const { error } = await supabase.auth.updateUser({
+    data: { displayName: parsed.data.name },
+  });
 
   if (error) {
-    console.log(error, "error");
     return {
       success: false,
       message: `somethign went wrong: ${error}`,

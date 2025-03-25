@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Footer from "./components/footer";
-import NavBar from "./components/navbar";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 import { createClient } from "./utils/supabase/server";
+import NavBar from "./components/navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,7 +40,12 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased h-full`}
       >
-        <NavBar loggedIn={data.user ? true : false}></NavBar>
+        <NavBar
+          loggedIn={data.user ? true : false}
+          fullName={data.user?.user_metadata.displayName}
+          email={data.user?.email}
+        ></NavBar>
+
         {children}
         <Footer></Footer>
         <SpeedInsights />

@@ -1,5 +1,5 @@
 "use client";
-import { login, signup } from "../actions";
+import { login, signup } from "../actions/auth";
 import { GoogleAuthButton } from "../components/google-auth-button";
 
 export default function Login() {

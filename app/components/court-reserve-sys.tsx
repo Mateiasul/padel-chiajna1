@@ -21,7 +21,13 @@ const CourtReservationSystem = ({
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
 
   const [loading, setLoading] = useState(false);
-  const [selectedCourt, setSelectedCourt] = useState<number | undefined>();
+  const [selectedCourt, setSelectedCourt] = useState<
+    | {
+        name: string;
+        id: number;
+      }
+    | undefined
+  >();
   const [selectedTimeSlot, setSelectedTimeSlot] = useState<string>();
   const [bookingSuccess, setBookingSuccess] = useState(false);
   const {
@@ -49,7 +55,6 @@ const CourtReservationSystem = ({
   };
 
   const onSubmit = async (data: z.output<typeof bookingFormSchema>) => {
-    console.log(data, "data");
     if (!selectedCourt || !selectedTimeSlot) {
       alert("Vă rugăm să selectați un teren și un interval orar");
       return;
@@ -65,7 +70,8 @@ const CourtReservationSystem = ({
       formData.append("phone", data.phone);
       formData.append("endHour", `${endHour}:00)`);
       formData.append("startHour", `${startHour}:00`);
-      formData.append("court_id", selectedCourt.toString());
+      formData.append("court_id", selectedCourt.id.toString());
+      formData.append("court_name", selectedCourt.name.toString());
       formData.append("bookingDate", date);
 
       const { success } = await onSubmitAction(formData);
@@ -130,11 +136,13 @@ const CourtReservationSystem = ({
             <div
               key={court.id}
               className={`border rounded-lg p-4 cursor-pointer transition-all ${
-                selectedCourt === court.id
+                selectedCourt?.id === court.id
                   ? "bg-blue-50 border-blue-500 shadow-md"
                   : "border-gray-300 hover:border-blue-300 hover:shadow-sm"
               }`}
-              onClick={() => setSelectedCourt(court.id)}
+              onClick={() =>
+                setSelectedCourt({ name: court.name, id: court.id })
+              }
             >
               <h3 className="text-lg font-semibold text-blue-700">
                 {court.name}
@@ -152,7 +160,7 @@ const CourtReservationSystem = ({
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
             {timeSlots.map((timeSlot) => {
-              const isBooked = isTimeSlotBooked(selectedCourt, timeSlot);
+              const isBooked = isTimeSlotBooked(selectedCourt.id, timeSlot);
               return (
                 <div
                   key={timeSlot}
