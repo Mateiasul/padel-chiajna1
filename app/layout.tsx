@@ -5,7 +5,7 @@ import Footer from "./components/footer";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 import { createClient } from "./utils/supabase/server";
-import NavBar from "./components/navbar";
+import NavBar from "./components/navbar/navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,6 +31,7 @@ export default async function RootLayout({
   const supabase = await createClient();
 
   const { data, error } = await supabase.auth.getUser();
+
   if (error || !data?.user) {
     console.log("Error occurred", { error });
   }
@@ -42,11 +43,7 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased h-full`}
       >
-        <NavBar
-          loggedIn={data.user ? true : false}
-          fullName={data.user?.user_metadata.displayName}
-          email={data.user?.email}
-        ></NavBar>
+        <NavBar />
 
         {children}
         <Footer></Footer>

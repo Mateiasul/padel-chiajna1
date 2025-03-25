@@ -2,7 +2,7 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
 export async function updateSession(request: NextRequest) {
-  const protectedPaths = ["/rezerva"];
+  const protectedPaths = ["/rezerva", "/account"];
 
   let supabaseResponse = NextResponse.next({
     request,
@@ -38,6 +38,13 @@ export async function updateSession(request: NextRequest) {
 
   if (isProtectedRoute && !session.data.user) {
     return NextResponse.redirect(new URL("/login", request.url));
+  }
+
+  // Redirect authenticated users attempting to access the sign-in page to the home page
+  if (session.data.user && request.nextUrl.pathname.startsWith("/login")) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/";
+    return NextResponse.redirect(url);
   }
 
   return supabaseResponse;
